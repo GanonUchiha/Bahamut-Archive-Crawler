@@ -106,7 +106,7 @@ def save_to_csv(archive: List, csv_file: str):
         csv_file: The location to save the csv file
     '''
     with open(csv_file, "w+", newline="", encoding="utf8") as fp:
-        print("儲存至 {}".format(csv_file))
+        print("儲存至 \"{}\"".format(csv_file))
         writer = csv.writer(fp)
         for entry in archive:
             writer.writerow(entry)
@@ -123,7 +123,7 @@ def save_to_txt(archive, txt_file):
         txt_file: The location to save the txt file
     '''
     with open(txt_file, "w", newline="", encoding="utf-8") as fp:
-        print("儲存至 {}".format(txt_file))
+        print("儲存至 \"{}\"".format(txt_file))
         fp.write("編號{} | 主題\n".format(" " * 16))
         for entry in archive[1:]:
             fp.write("{0:<20} | {1}\n".format(entry[0], entry[1]))
