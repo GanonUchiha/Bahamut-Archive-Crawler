@@ -2,3 +2,4 @@
 *.csv
 *.ini
 output
+__pycache__
