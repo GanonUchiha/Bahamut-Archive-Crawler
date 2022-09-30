@@ -38,7 +38,9 @@ def is_dir(img_tag: Tag):
     return img_tag["class"][0] == "IMG-E14"
 
 def title_rename(title):
-    return re.sub(r"[\\\/:\*\?\"><\|]", "", title.strip().replace(" ", "_"))
+    title_normalized: str = re.sub(r"[^\w\d☆！：（） ]+", "", title)
+    title_cleaned: str = re.sub(" +", " ", title_normalized.strip())
+    return title_cleaned
 
 def get_archive(soup: BeautifulSoup, dir_depth=0, parent_id="") -> Tuple[List, str]:
     '''
@@ -64,7 +66,7 @@ def get_archive(soup: BeautifulSoup, dir_depth=0, parent_id="") -> Tuple[List, s
     if dir_depth == 0:
         title = soup.find("title").text.replace("精華區 - 巴哈姆特", "")
         title = title_rename(title)
-        print("開始分析 {} 的精華區目錄".format(title))
+        print("開始分析 「{}」 的精華區目錄".format(title))
         archive.append(["編號", "主題", "網址", "更新日期"])
 
     for row in table.find_all("tr")[1:]:
